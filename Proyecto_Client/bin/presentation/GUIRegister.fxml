@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="myAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="business.GUIRegisterController">
+   <children>
+      <Pane fx:id="pM" layoutX="90.0" layoutY="37.0" prefHeight="415.0" prefWidth="467.0">
+         <children>
+            <Label layoutX="156.0" layoutY="14.0" prefHeight="31.0" prefWidth="156.0" text="Crear cuenta" textFill="#ee2222">
+               <font>
+                  <Font name="Candara" size="26.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfFullName" layoutX="107.0" layoutY="72.0" prefHeight="25.0" prefWidth="239.0" promptText="Ingrese su nombre completo" />
+            <TextField fx:id="tfId" layoutX="107.0" layoutY="120.0" prefHeight="25.0" prefWidth="239.0" promptText="Ingrese su numero de cedula" />
+            <TextField fx:id="tfMail" layoutX="107.0" layoutY="257.0" prefHeight="25.0" prefWidth="239.0" promptText="Ingrese su correo" />
+            <TextField fx:id="tfPassword" layoutX="107.0" layoutY="305.0" prefHeight="25.0" prefWidth="239.0" promptText="Ingrese la contraseña" />
+            <TextField fx:id="tfAddress" layoutX="107.0" layoutY="166.0" prefHeight="25.0" prefWidth="239.0" promptText="Ingrese la direccion" />
+            <TextField fx:id="tfPhone" layoutX="107.0" layoutY="212.0" prefHeight="25.0" prefWidth="239.0" promptText="Ingrese su numero de telefono" />
+            <Button fx:id="btnRegister" layoutX="143.0" layoutY="351.0" mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="168.0" text="Registrarse" />
+            <ImageView fitHeight="93.0" fitWidth="92.0" layoutX="369.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Img/perfil-del-usuario%20(3).png" />
+               </image>
+            </ImageView>
+            <Label fx:id="setMessage" layoutX="107.0" layoutY="384.0" prefHeight="17.0" prefWidth="239.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

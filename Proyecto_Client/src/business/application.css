@@ -1,0 +1,83 @@
+/* Fondo general */
+.root {
+    -fx-background-color: #2b2b2b;
+}
+
+/* Pane principal con bordes visibles */
+#pMajor {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #8b0000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+    
+    /* Asegurar que los bordes no afecten los hijos */
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 3, 3);
+}
+
+/* Estilos de los campos de texto */
+TextField, PasswordField {
+	 -fx-border-color: #ff3333; /* Un rojo más vibrante */
+    -fx-background-color: #2b2b2b;
+    -fx-border-width: 2px;
+  
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: gray;
+
+    
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+
+  
+   
+}
+
+
+
+/* Botones */
+Button {
+    -fx-background-color: linear-gradient(to bottom, #ff3333, #8b0000);
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+/* Efecto hover en botones */
+Button:hover {
+    -fx-background-color: linear-gradient(to bottom, #ff6666, #b30000);
+    -fx-background-color: darkred;
+}
+
+ImageView {
+    -fx-translate-y: 3px;
+}
+#pM {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #8b0000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+    
+    /* Asegurar que los bordes no afecten los hijos */
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 3, 3);
+}
+.lblError{
+    -fx-text-fill:red;
+}
+
+.lblSucess{
+    -fx-text-fill:green;
+}
+.lblNotification{
+	-fx-text-fill: white;
+}

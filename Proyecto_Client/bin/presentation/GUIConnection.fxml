@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="308.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.GUIConnectionController">
+   <children>
+      <Label layoutX="36.0" layoutY="78.0" prefHeight="17.0" prefWidth="35.0" text="Ip:" textFill="#dd0505" />
+      <TextField fx:id="tfIp" layoutX="77.0" layoutY="74.0" prefHeight="25.0" prefWidth="158.0" />
+      <Label layoutX="36.0" layoutY="139.0" prefHeight="17.0" prefWidth="35.0" text="Port:" textFill="#dd0505" />
+      <TextField fx:id="tfPort" layoutX="77.0" layoutY="135.0" prefHeight="25.0" prefWidth="158.0" />
+      <Label fx:id="lblsetMessage" layoutX="36.0" layoutY="179.0" prefHeight="17.0" prefWidth="240.0" />
+      <Button fx:id="btnConnection" layoutX="77.0" layoutY="219.0" mnemonicParsing="false" onAction="#connection" prefHeight="25.0" prefWidth="158.0" text="Conectar al servidor" />
+      <Label layoutX="112.0" layoutY="38.0" prefHeight="23.0" prefWidth="88.0" text="Conexion" textFill="#dd0505">
+         <font>
+            <Font name="Century" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnEnter" layoutX="77.0" layoutY="261.0" mnemonicParsing="false" onAction="#enter" prefHeight="25.0" prefWidth="158.0" text="Entrar" />
+   </children>
+</AnchorPane>
