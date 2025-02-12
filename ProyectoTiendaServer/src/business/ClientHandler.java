@@ -41,6 +41,12 @@ public class ClientHandler implements Runnable {
                     case "LOGIN":
                         handleLogin(parts);
                         break;
+                        
+                    case "UPDATE_PROFILE":
+                        handleUpdateProfile(parts);
+                        break;
+                        
+                        
                     default:
                         out.println("ERROR: Comando no reconocido");
                 }
@@ -108,6 +114,44 @@ public class ClientHandler implements Runnable {
     	
     	
     }
+    private void handleUpdateProfile(String[] parts) {
+        try {
+            if (parts.length < 6) { // Verificamos que vengan todos los datos necesarios
+                out.println("ERROR: Datos incompletos");
+                return;
+            }
+
+            String email = parts[1];  // Email del usuario a actualizar (identificador único)
+            String fullName = parts[2];
+            String address = parts[3];
+            String phone = parts[4];
+            String newPassword = parts.length > 5 ? parts[5] : ""; // La contraseña es opcional
+
+            Client client = dataClient.find(email); // Buscar usuario en JSON
+            if (client == null) {
+                out.println("ERROR: Usuario no encontrado");
+                return;
+            }
+
+            // Actualizar solo los datos que se permiten modificar
+            client.setFullName(fullName);
+            client.setAddress(address);
+            client.setPhone(phone);
+            if (!newPassword.isEmpty()) {
+                client.setPasswordHash(newPassword); // Si el usuario proporciona una nueva contraseña, se actualiza
+            }
+
+            dataClient.update(client); // Guardar cambios en JSON
+            out.println("SUCCESS: Perfil actualizado correctamente");
+
+        } catch (Exception e) {
+            out.println("ERROR: No se pudo actualizar el perfil");
+        }
+    }
+
     
 
 }
+
+
+

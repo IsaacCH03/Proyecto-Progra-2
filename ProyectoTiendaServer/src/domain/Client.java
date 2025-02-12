@@ -97,7 +97,8 @@ public class Client {
     public String toString() {
         return email; // Se usa email como identificador único
     }
+	
 	public String toString2() {
-        return fullName + ";" + id + ";" + email + ";" + passwordHash + ";" + address + ";" + phone;
-    } 
+	    return fullName + ";" + id + ";" + email + ";" + passwordHash + ";" + address + ";" + phone;
+	}
 }

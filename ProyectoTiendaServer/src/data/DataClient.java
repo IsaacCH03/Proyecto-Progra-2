@@ -15,6 +15,8 @@ public class DataClient {
         }
         return List.of();
     }
+    
+    
 
     public void save(Client client) {
         try {
@@ -50,6 +52,25 @@ public class DataClient {
         }
         return null;
     }
+    
+    public void update(Client updatedClient) {
+        try {
+            List<Client> clients = getList(); // Cargar todos los clientes
+            for (int i = 0; i < clients.size(); i++) {
+                if (clients.get(i).getEmail().equals(updatedClient.getEmail())) {
+                    clients.set(i, updatedClient); // Reemplazar el cliente con los nuevos datos
+                    jsonUtils.saveList(clients); // Guardar la lista actualizada en el JSON
+                    System.out.println("Usuario actualizado correctamente.");
+                    return;
+                }
+            }
+            System.out.println("ERROR: Usuario no encontrado.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 
     public boolean authenticate(String email, String password) {
         Client client = find(email);

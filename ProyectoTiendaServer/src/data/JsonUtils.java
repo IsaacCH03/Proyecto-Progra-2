@@ -39,6 +39,11 @@ public class JsonUtils<T> {//clase generica
 		
 		
 	}
+	//metodo para guardar una lista de objetos en un archivo Json
+	public void saveList(List<T> list) throws Exception {
+	    mapper.writeValue(new File(this.filePath), list);
+	}
+
 	
 	//metodo para buscar una pelicula en la lista por el nombre
 	public T findElement(String name, Class<T> temp) throws Exception {
