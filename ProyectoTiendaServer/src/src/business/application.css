@@ -1,0 +1,86 @@
+/* Estilo general para toda la aplicación */
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #222;
+    -fx-text-fill: #fff;
+}
+
+#lblTittle{
+	-fx-text-fill:#fff;
+	 -fx-font-weight: bold;
+	 -fx-font-family: "San-serif";
+	 -fx-font-size: 18px;
+	
+}
+
+#anchorPane{
+	-fx-background-color: black;
+}
+
+#paneData{
+	-fx-background-color: #222;
+	-fx-border-radius: 8;
+	-fx-border-width: 5;
+	
+}
+
+#paneShow{
+	-fx-background-color: #222;
+	-fx-border-radius: 15 !important;
+	 -fx-border-width: 5;
+}
+
+
+/* Estilo para los botones */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #b22222, #8b0000);
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-border-color: #ff6347;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #ff6347, #b22222);
+}
+
+#lblBilling{
+	-fx-text-fill:#fff;
+	 -fx-font-weight: bold;
+	 -fx-font-family: "San-serif";
+	 -fx-font-size: 15px;
+	
+}
+
+/* Estilo para los campos de texto */
+.text-field {
+    -fx-background-color: #333;
+    -fx-text-fill: #fff;
+    -fx-border-color: #ff6347;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill: #bbb;
+    -fx-background-radius: 10;
+}
+
+.text-area {
+    -fx-background-color: #333; /* Color de fondo externo */
+    -fx-control-inner-background: #444; /* Color de fondo interno */
+    -fx-text-fill: #fff; /* Color del texto */
+    -fx-border-color: #ff6347;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill: #bbb; /* Color del texto de sugerencia */
+    -fx-background-radius: 10;
+}
+
+
+
+/* Estilo para la barra de herramientas */
+.tool-bar {
+    -fx-background-color: #333;
+    -fx-border-color: #8b0000;
+    -fx-border-width: 0 0 2px 0;
+}
