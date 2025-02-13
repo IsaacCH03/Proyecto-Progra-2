@@ -43,7 +43,19 @@ public class GUILoginController {
 
         String mail = tfMail.getText();
         String pass = pfPassword.getText();
-        clientF.login(mail, pass, setMessage);
+        btnLogin.setDisable(true);
+        clientF.setUser(null);
+        clientF.login(mail, pass, setMessage, btnLogin);
+        
+      
+        while(btnLogin.isDisable()) {
+        	System.out.println("hola");
+        }
+        System.out.println("salio");
+        
+        if(clientF.getUser() != null) {
+        	viewProfile();
+        }
     }
 
     private boolean validateFields() {
@@ -105,5 +117,34 @@ public class GUILoginController {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), e -> setMessage.setText("")));
         timeline.setCycleCount(1);
         timeline.play();
+    }
+    private void viewProfile() {
+    	try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIViewProfile.fxml"));
+            Parent root = loader.load();
+            GUIViewProfileController controller = loader.getController();
+            
+            controller.loadData(clientF);
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            stage.show();
+            
+            stage.setOnCloseRequest(e -> controller.closeWindows());
+            
+            Stage temp = (Stage) this.btnLogin.getScene().getWindow();
+            temp.close();
+        } catch (IOException e) {
+            System.out.println("Error al ir a la vista");
+        }
+    }
+    public  void waitLogin() {
+    	while (true) {
+    		if(clientF != null) {
+    			return;
+    		}
+    	}
     }
 }

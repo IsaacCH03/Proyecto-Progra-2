@@ -56,7 +56,7 @@ public class GUIRegisterController {
             int phone = Integer.parseInt(tfPhone.getText());
 
             User user = new User(fullName, id, mail, password, address, phone);
-            clientF.sendRecord(user, setMessage);
+            clientF.sendRecord(user,setMessage);
         } catch (NumberFormatException e) {
             notify("Error: ID y Teléfono deben ser números válidos.", "lblError");
         }

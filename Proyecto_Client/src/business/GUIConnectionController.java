@@ -74,7 +74,7 @@ public class GUIConnectionController {
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             stage.show();
             
-            stage.setOnCloseRequest(e -> controller.closeWindows());
+       //     stage.setOnCloseRequest(e -> controller.closeWindows());
             
             Stage temp = (Stage) this.btnConnection.getScene().getWindow();
             temp.close();
