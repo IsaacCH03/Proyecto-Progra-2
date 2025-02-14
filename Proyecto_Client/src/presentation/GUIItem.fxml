@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#onClick" prefHeight="215.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.GUIItemController">
+	<children>
+		<VBox alignment="TOP_CENTER" layoutX="63.0" layoutY="8.0" prefHeight="200.0" prefWidth="100.0" styleClass="fruit-item" stylesheets="@../business/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<HBox prefHeight="51.0" prefWidth="220.0">
+					<children>
+						<Label fx:id="lblNameProduct" prefHeight="49.0" prefWidth="135.0" text="Teclado">
+							<font>
+								<Font name="Cambria" size="18.0" />
+							</font>
+						</Label>
+						<Label fx:id="lblPrice" prefHeight="49.0" prefWidth="103.0" text="₡420000">
+							<font>
+								<Font name="Cambria Bold" size="14.0" />
+							</font>
+						</Label>
+					</children>
+					<VBox.margin>
+						<Insets left="20.0" right="20.0" top="20.0" />
+					</VBox.margin>
+				</HBox>
+				<ImageView fx:id="ivProduct" fitHeight="130.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../../Img/prodTeclado3.jpg" />
+					</image>
+				</ImageView>
+			</children>
+		</VBox>
+	</children>
+</AnchorPane>

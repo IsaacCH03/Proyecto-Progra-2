@@ -1,19 +1,23 @@
 package business;
 	
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	
+
+	public static final String CURRENCY = "Precio: ₡";
 	@Override
 	public void start(Stage primaryStage) {
+		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/presentation/GUIConnection.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("/presentation/GUILogin.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/presentation/GUIMarket.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);

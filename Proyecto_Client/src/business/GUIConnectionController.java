@@ -51,7 +51,7 @@ public class GUIConnectionController {
                 notify("Error en la conexion", "lblError");
             }
         } catch (NumberFormatException e) {
-            notify("Error: El puerto debe ser un número válido.", "lblError");
+            notify("Error: El puerto debe ser un nÃºmero vÃ¡lido.", "lblError");
         }
     }
 

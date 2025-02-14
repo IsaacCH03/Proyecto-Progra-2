@@ -9,35 +9,56 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.GUILoginController">
-   <children>
-      <Pane fx:id="pMajor" layoutX="72.0" layoutY="18.0" prefHeight="401.0" prefWidth="428.0">
-         <children>
-            <Button fx:id="btnLogin" layoutX="91.0" layoutY="263.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="225.0" text="Iniciar sesion" />
-            <Button fx:id="btnRegister" layoutX="91.0" layoutY="323.0" mnemonicParsing="false" onAction="#register" prefHeight="36.0" prefWidth="225.0" text="Registrarse" />
-            <ImageView fitHeight="133.0" fitWidth="124.0" layoutX="142.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Img/usuario.png" />
-               </image>
-            </ImageView>
-            <Pane fx:id="pTfs" layoutX="14.0" layoutY="164.0" prefHeight="92.0" prefWidth="338.0">
-               <children>
-                  <PasswordField fx:id="pfPassword" layoutX="84.0" layoutY="51.0" prefHeight="25.0" prefWidth="225.0" promptText="Digite la contraseña" />
-                  <ImageView fitHeight="20.0" fitWidth="31.0" layoutX="58.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Img/cerrar%20(1).png" />
-                     </image>
-                  </ImageView>
-                  <TextField fx:id="tfMail" layoutX="84.0" layoutY="12.0" prefHeight="25.0" prefWidth="225.0" promptText="Digite el correo electronico" />
-                  <ImageView fitHeight="25.0" fitWidth="20.0" layoutX="58.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Img/usuario%20(3).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-            <Label fx:id="setMessage" layoutX="91.0" layoutY="370.0" prefHeight="17.0" prefWidth="225.0" textAlignment="CENTER" />
-         </children>
-      </Pane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0"
+	prefWidth="571.0" xmlns="http://javafx.com/javafx/23.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="business.GUILoginController">
+	<children>
+		<Pane fx:id="pMajor" layoutX="72.0" layoutY="18.0"
+			prefHeight="401.0" prefWidth="428.0">
+			<children>
+				<Button fx:id="btnLogin" layoutX="91.0" layoutY="263.0"
+					mnemonicParsing="false" onAction="#login" prefHeight="36.0"
+					prefWidth="225.0" text="Iniciar sesion" />
+				<Button fx:id="btnRegister" layoutX="91.0" layoutY="323.0"
+					mnemonicParsing="false" onAction="#register" prefHeight="36.0"
+					prefWidth="225.0" text="Registrarse" />
+				<ImageView fitHeight="133.0" fitWidth="124.0"
+					layoutX="142.0" layoutY="14.0" pickOnBounds="true"
+					preserveRatio="true">
+					<image>
+						<Image url="@../../Img/usuario.png" />
+					</image>
+				</ImageView>
+				<Pane fx:id="pTfs" layoutX="14.0" layoutY="164.0"
+					prefHeight="92.0" prefWidth="338.0">
+					<children>
+						<PasswordField fx:id="pfPassword" layoutX="84.0"
+							layoutY="51.0" prefHeight="25.0" prefWidth="225.0"
+							promptText="Digite la contraseña" />
+						<ImageView fitHeight="20.0" fitWidth="31.0"
+							layoutX="58.0" layoutY="54.0" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../../Img/cerrar%20(1).png" />
+							</image>
+						</ImageView>
+						<TextField fx:id="tfMail" layoutX="84.0" layoutY="12.0"
+							prefHeight="25.0" prefWidth="225.0"
+							promptText="Digite el correo electronico" />
+						<ImageView fitHeight="25.0" fitWidth="20.0"
+							layoutX="58.0" layoutY="15.0" pickOnBounds="true"
+							preserveRatio="true">
+							<image>
+								<Image url="@../../Img/usuario%20(3).png" />
+							</image>
+						</ImageView>
+					</children>
+				</Pane>
+				<Label fx:id="setMessage" layoutX="91.0" layoutY="370.0"
+					prefHeight="17.0" prefWidth="225.0" />
+			</children>
+		</Pane>
+	</children>
 </AnchorPane>
