@@ -13,33 +13,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity"
-	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-	prefHeight="843.0" prefWidth="1141.0"
-	xmlns="http://javafx.com/javafx/23.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="business.GUICrudProductController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="1141.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.GUICrudProductController">
 	<children>
 		<!-- Barra personalizada -->
-		<ToolBar fx:id="toolBAR" onMouseDragged="#handleMouseDragged"
-			onMousePressed="#handleMousePressed" prefHeight="40.0"
-			prefWidth="1141.0"
-			style="-fx-background-color: #333; -fx-padding: 5;">
+		<ToolBar fx:id="toolBAR" onMouseDragged="#handleMouseDragged" onMousePressed="#handleMousePressed" prefHeight="40.0" prefWidth="1141.0" style="-fx-background-color: #333; -fx-padding: 5;">
 			<items>
 				<!-- Botón de minimizar -->
-				<Button fx:id="btnMinimize" onAction="#minimizeWindow"
-					prefHeight="25.0" prefWidth="27.0"
-					style="-fx-background-color: #555; -fx-text-fill: white;" text="-">
+				<Button fx:id="btnMinimize" onAction="#minimizeWindow" prefHeight="25.0" prefWidth="27.0" style="-fx-background-color: #555; -fx-text-fill: white;" text="-">
 					<cursor>
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</Button>
 
 				<!-- Botón de cerrar -->
-				<Button fx:id="btnClose" onAction="#closeWindow"
-					prefHeight="25.0" prefWidth="31.0"
-					style="-fx-background-color: #b22222; -fx-text-fill: white;"
-					text="X">
+				<Button fx:id="btnClose" onAction="#closeWindow" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: #b22222; -fx-text-fill: white;" text="X">
 					<cursor>
 						<Cursor fx:constant="HAND" />
 					</cursor>
@@ -48,9 +35,7 @@
 				<!-- Espaciador flexible -->
 				<Pane fx:id="spacer" prefWidth="800.0">
 					<children>
-						<Label alignment="CENTER" layoutX="333.0" layoutY="10.0"
-							prefHeight="17.0" prefWidth="411.0" text="CRUD Productos"
-							textAlignment="CENTER" textFill="WHITE">
+						<Label alignment="CENTER" layoutX="333.0" layoutY="10.0" prefHeight="17.0" prefWidth="411.0" text="CRUD Productos" textAlignment="CENTER" textFill="WHITE">
 							<font>
 								<Font name="Serif Regular" size="29.0" />
 							</font>
@@ -61,87 +46,69 @@
 		</ToolBar>
 
 		<!-- Pane para ingresar datos -->
-		<Pane fx:id="paneData" layoutX="23.0" layoutY="61.0"
-			prefHeight="732.0" prefWidth="411.0">
+		<Pane fx:id="paneData" layoutX="23.0" layoutY="61.0" prefHeight="732.0" prefWidth="411.0">
 			<opaqueInsets>
 				<Insets />
 			</opaqueInsets>
 			<children>
-				<Label fx:id="lblTittle" alignment="CENTER" layoutY="14.0"
-					prefHeight="17.0" prefWidth="411.0"
-					text="Ingrese los datos del producto" textAlignment="CENTER" />
-				<TextField fx:id="tfNameProduct" layoutX="24.0"
-					layoutY="79.0" prefHeight="34.0" prefWidth="367.0"
-					promptText="Nombre del producto">
+				<Label fx:id="lblTittle" alignment="CENTER" layoutY="14.0" prefHeight="17.0" prefWidth="411.0" text="Ingrese los datos del producto" textAlignment="CENTER" />
+				<TextField fx:id="tfNameProduct" layoutX="24.0" layoutY="79.0" prefHeight="34.0" prefWidth="367.0" promptText="Nombre del producto">
 					<cursor>
 						<Cursor fx:constant="TEXT" />
 					</cursor>
 				</TextField>
-				<TextArea fx:id="taDescriptionProduct" layoutX="24.0"
-					layoutY="131.0" prefHeight="68.0" prefWidth="367.0"
-					promptText="Descripcion detallada del producto">
+				<TextArea fx:id="taDescriptionProduct" layoutX="24.0" layoutY="131.0" prefHeight="68.0" prefWidth="367.0" promptText="Descripcion detallada del producto">
 					<cursor>
 						<Cursor fx:constant="TEXT" />
 					</cursor>
 				</TextArea>
-				<TextField fx:id="tfPrice" layoutX="24.0" layoutY="214.0"
-					prefHeight="34.0" prefWidth="367.0" promptText="Precio unitario">
+				<TextField fx:id="tfPrice" layoutX="24.0" layoutY="214.0" prefHeight="34.0" prefWidth="367.0" promptText="Precio unitario">
 					<cursor>
 						<Cursor fx:constant="TEXT" />
 					</cursor>
 				</TextField>
-				<TextField fx:id="tfStock" layoutX="24.0" layoutY="264.0"
-					prefHeight="34.0" prefWidth="367.0" promptText="Cantidad en stock">
+				<TextField fx:id="tfStock" layoutX="24.0" layoutY="264.0" prefHeight="34.0" prefWidth="367.0" promptText="Cantidad en stock">
 					<cursor>
 						<Cursor fx:constant="TEXT" />
 					</cursor>
 				</TextField>
-				<TextField fx:id="tfCategory" layoutX="24.0"
-					layoutY="310.0" prefHeight="34.0" prefWidth="367.0"
-					promptText="Categoria del producto">
+				<TextField fx:id="tfCategory" layoutX="24.0" layoutY="310.0" prefHeight="34.0" prefWidth="367.0" promptText="Categoria del producto">
 					<cursor>
 						<Cursor fx:constant="TEXT" />
 					</cursor>
 				</TextField>
-				<Button fx:id="btnSelectImage" layoutX="24.0" layoutY="364.0"
-					mnemonicParsing="false" onAction="#selectImage" prefHeight="25.0"
-					prefWidth="279.0" text="Seleccionar imagen del producto">
+				<Button fx:id="btnSelectImage" layoutX="40.0" layoutY="366.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="25.0" prefWidth="279.0" text="Seleccionar imagen del producto">
 					<cursor>
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</Button>
-				<ImageView fx:id="ivImageProduct" fitHeight="238.0"
-					fitWidth="367.0" layoutX="22.0" layoutY="412.0" pickOnBounds="true"
-					preserveRatio="true" />
-				<Button fx:id="btnSaveProduct" layoutX="133.0"
-					layoutY="681.0" mnemonicParsing="false" onAction="#saveProduct"
-					prefHeight="34.0" prefWidth="146.0" text="Guardar">
+				<ImageView fx:id="ivImageProduct" fitHeight="201.0" fitWidth="325.0" layoutX="40.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
+				<Button fx:id="btnSaveProduct" layoutX="133.0" layoutY="681.0" mnemonicParsing="false" onAction="#saveProduct" prefHeight="34.0" prefWidth="146.0" text="Guardar">
 					<cursor>
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</Button>
+            <Label fx:id="lblMessage" alignment="CENTER" layoutX="24.0" layoutY="615.0" prefHeight="43.0" prefWidth="367.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
 			</children>
 		</Pane>
 
 		<!-- Pane para mostrar datos -->
-		<Pane fx:id="paneShow" layoutX="450.0" layoutY="61.0"
-			prefHeight="732.0" prefWidth="682.0">
+		<Pane fx:id="paneShow" layoutX="450.0" layoutY="61.0" prefHeight="732.0" prefWidth="682.0">
 			<children>
-				<TextField fx:id="tfSearchProduct" layoutX="14.0"
-					layoutY="28.0" onKeyTyped="#searchProduct" prefHeight="25.0"
-					prefWidth="411.0" promptText="Buscar producto por nombre">
+				<TextField fx:id="tfSearchProduct" layoutX="14.0" layoutY="28.0" onKeyTyped="#searchProduct" prefHeight="25.0" prefWidth="411.0" promptText="Buscar producto por nombre">
 					<cursor>
 						<Cursor fx:constant="TEXT" />
 					</cursor>
 				</TextField>
-				<TableView fx:id="tvShowProduct" layoutX="1.0"
-					layoutY="77.0" prefHeight="643.0" prefWidth="675.0" />
+				<TableView fx:id="tvShowProduct" layoutX="1.0" layoutY="77.0" prefHeight="643.0" prefWidth="675.0" />
 			</children>
 		</Pane>
 
 		<!-- Botón de retroceso -->
-		<Button fx:id="btnBack" layoutX="14.0" layoutY="804.0"
-			mnemonicParsing="false" onAction="#backWindow" prefHeight="25.0"
-			prefWidth="81.0" text="Atrás" />
+		<Button fx:id="btnBack" layoutX="14.0" layoutY="804.0" mnemonicParsing="false" onAction="#backWindow" prefHeight="25.0" prefWidth="81.0" text="Atrás" />
 	</children>
 </AnchorPane>

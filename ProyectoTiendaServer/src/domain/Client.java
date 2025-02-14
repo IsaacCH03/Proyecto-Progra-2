@@ -10,10 +10,10 @@ public class Client {
     private String passwordHash;
     private String address;
     private String phone;
-    
-    
+    private String pass;
+
     public Client() {
-    	
+
     }
 
     public Client(String fullName, String id, String email, String password, String address, String phone) {
@@ -50,8 +50,8 @@ public class Client {
     public String getPasswordHash() {
         return passwordHash;
     }
-    
-    
+
+
 
     public String getFullName() {
 		return fullName;
@@ -98,7 +98,16 @@ public class Client {
         return email; // Se usa email como identificador único
     }
 	
+	
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
 	public String toString2() {
-	    return fullName + ";" + id + ";" + email + ";" + passwordHash + ";" + address + ";" + phone;
+	    return fullName + ";" + id + ";" + email + ";" + pass + ";" + address + ";" + phone;
 	}
 }

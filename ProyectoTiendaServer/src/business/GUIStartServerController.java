@@ -51,7 +51,7 @@ public class GUIStartServerController {
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		Stage stage = new Stage();
 		stage.initStyle(StageStyle.UNDECORATED);
-		stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/img/icono.png")));
+//		stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("Img/icono.png")));
 		stage.setScene(scene);
 		stage.show();
 		Stage temp = (Stage) this.btnCRUDProduct.getScene().getWindow();
@@ -67,7 +67,7 @@ public class GUIStartServerController {
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		Stage stage = new Stage();
 		stage.initStyle(StageStyle.UNDECORATED);
-		stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/img/icono.png")));
+//		stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("Img/icono.png")));
 		stage.setScene(scene);
 		stage.show();
 		Stage temp = (Stage) this.btnCRUDProduct.getScene().getWindow();

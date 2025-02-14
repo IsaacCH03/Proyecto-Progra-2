@@ -88,6 +88,9 @@ public class GUICrudProductController {
 	private TableColumn<Product, Integer> tcStock;
 	@FXML
 	private TableColumn<Product, String> tcCategory;
+	
+	 @FXML
+	 private Label lblMessage;
 
 	private Product editProduct;
 
@@ -132,29 +135,36 @@ public class GUICrudProductController {
 	// Event Listener on Button[#btnSelectImage].onAction
 	@FXML
 	public void selectImage(ActionEvent event) {
-		// Crear un FileChooser
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Seleccionar Imagen");
+	    FileChooser fileChooser = new FileChooser();
+	    fileChooser.setTitle("Seleccionar Imagen");
 
-		// Filtros para tipos de archivo permitidos
-		fileChooser.getExtensionFilters()
-				.addAll(new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg"));
+	    fileChooser.getExtensionFilters()
+	            .addAll(new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg"));
 
-		// Abrir el diálogo para seleccionar un archivo
-		File selectedFile = fileChooser.showOpenDialog(anchorPane.getScene().getWindow());
+	    File selectedFile = fileChooser.showOpenDialog(anchorPane.getScene().getWindow());
 
-		if (selectedFile != null) {
-			// Obtener la ruta del archivo seleccionado
-			String imagePath = selectedFile.toURI().toString();
+	    if (selectedFile != null) {
+	        // Obtener la ruta absoluta del archivo
+	        String fullPath = selectedFile.getAbsolutePath(); 
 
-			// Configurar la imagen seleccionada en el ImageView
-			ivImageProduct.setImage(new Image(imagePath));
+	        // Buscar la carpeta "Img/" dentro de la ruta
+	        int index = fullPath.lastIndexOf("Img" + File.separator);
+	        String relativePath;// Ruta relativa de la imagen
+	        if (index != -1) {// Si encuentra la carpeta "Img/" en la ruta absoluta del archivo
+	            relativePath = fullPath.substring(index); // Extrae solo desde "Img/"
+	        } else {
+	            relativePath = "Img/" + selectedFile.getName(); // Si no encuentra la carpeta, usa el nombre del archivo
+	        }
 
-			// Actualizar el objeto Product (si ya existe o guardarlo al crear uno nuevo)
-			// Aquí deberías guardar la ruta de la imagen en el Product
-			System.out.println("Imagen seleccionada: " + imagePath);
-		}
+	        // Configura la imagen seleccionada en el ImageView con la ruta RELATIVA
+	        ivImageProduct.setImage(new Image("file:" + relativePath));
+
+	        // Guardar solo la ruta relativa
+	        System.out.println("Imagen seleccionada: " + relativePath);
+	    }
 	}
+
+
 
 	// Event Listener on Button[#btnSaveProduct].onAction
 	@FXML
@@ -266,11 +276,26 @@ public class GUICrudProductController {
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		Stage stage = new Stage();
 		stage.initStyle(StageStyle.UNDECORATED);
-		stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/img/icono.png")));
+//		stage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("Img/icono.png")));
 		stage.setScene(scene);
 		stage.show();
 		Stage temp = (Stage) this.btnBack.getScene().getWindow();
 		temp.close();
+		
+		
+	}
+	
+	private boolean validForm() {
+		
+		if (tfNameProduct.getText().isEmpty() || taDescriptionProduct.getText().isEmpty() || tfPrice.getText().isEmpty()
+				|| tfStock.getText().isEmpty() || tfCategory.getText().isEmpty()) {
+			lblMessage.setText("Faltan campos por llenar");
+			
+	
+			return false;
+		}
+		return true;
+		
 		
 		
 	}

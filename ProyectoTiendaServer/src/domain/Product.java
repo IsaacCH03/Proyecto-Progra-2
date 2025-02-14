@@ -14,7 +14,6 @@ public class Product {
     private int stock;
     private String category;
     private int value; // 1 es malo, 2 es regular, 3 es bueno, 4 es muy bueno, 5 es excelente
-    private ArrayList<CommentQualification> commentQualification;
     private String urlImage;
     
     
@@ -38,7 +37,7 @@ public class Product {
 	}
 
 	public Product(String name, String description, double price, int stock, String category,
-                   int value, ArrayList<CommentQualification> commentQualification, String urlImage) {
+                   int value, String urlImage) {
         this.idProduct = generateUniqueID();
         this.name = name;
         this.description = description;
@@ -46,7 +45,6 @@ public class Product {
         this.stock = stock;
         this.category = category;
         this.value = value;
-        this.commentQualification = commentQualification;
         this.urlImage = urlImage;
     }
 
@@ -84,9 +82,6 @@ public class Product {
         return value;
     }
 
-    public ArrayList<CommentQualification> getCommentQualification() {
-        return commentQualification;
-    }
 
     public String getUrlImage() {
         return urlImage;
@@ -102,7 +97,6 @@ public class Product {
                 ", stock=" + stock +
                 ", category='" + category + '\'' +
                 ", value=" + value +
-                ", commentQualification=" + commentQualification +
                 ", urlImage='" + urlImage + '\'' +
                 '}';
     }

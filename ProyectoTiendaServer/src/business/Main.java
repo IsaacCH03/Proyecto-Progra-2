@@ -15,7 +15,7 @@ public class Main extends Application {
 	        Parent root = FXMLLoader.load(getClass().getResource("/presentation/GUIStartServer.fxml"));
 	        Scene scene = new Scene(root);
 	        primaryStage.setTitle("Server");
-	        primaryStage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/img/icono.png")));
+//	        primaryStage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/Img/icono.png")));
 	        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	        primaryStage.setScene(scene);
 	        primaryStage.show();

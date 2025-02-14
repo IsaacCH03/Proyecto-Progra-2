@@ -2,8 +2,14 @@ package business;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import data.DataClient;
+import data.DataProduct;
 import domain.Client;
+import domain.Product;
 
 public class ClientHandler implements Runnable {
 	private Socket clientSocket;
@@ -46,6 +52,9 @@ public class ClientHandler implements Runnable {
                         handleUpdateProfile(parts);
                         break;
                         
+                    case "GET_PRODUCTS":// Agregar case para el comando GET_PRODUCTS
+                        handleGetProducts();
+                        break;
                         
                     default:
                         out.println("ERROR: Comando no reconocido");
@@ -62,6 +71,15 @@ public class ClientHandler implements Runnable {
             }
         }
     }
+    
+    public void sendMessage(String message) {
+        try {
+            out.println(message);
+        } catch (Exception e) {
+            System.out.println("Error enviando mensaje al cliente: " + e.getMessage());
+        }
+    }
+
 
     private void handleRegister(String[] parts) {
         try {
@@ -84,9 +102,9 @@ public class ClientHandler implements Runnable {
 
             Client newClient = new Client(fullName, id, email, password, address, phone);
             dataClient.save(newClient);
-            out.println("SUCCESS: Usuario registrado correctamente");
+            out.println("REGISTER: Usuario registrado correctamente");
         } catch (Exception e) {
-            out.println("ERROR: No se pudo registrar el usuario");
+            out.println("REGISTERERROR: No se pudo registrar el usuario");
         }
     }
     
@@ -101,6 +119,7 @@ public class ClientHandler implements Runnable {
     		 String password = parts[2];
     		 
     		 Client client = dataClient.find(email);
+    		 client.setPass(password);
     		 if (client != null && client.validatePassword(password)) {
     			    out.println("SUCCESS:" + client.toString2()); // Enviar el objeto serializado
     			} else {
@@ -120,38 +139,41 @@ public class ClientHandler implements Runnable {
                 out.println("ERROR: Datos incompletos");
                 return;
             }
-
             String email = parts[1];  // Email del usuario a actualizar (identificador único)
             String fullName = parts[2];
             String address = parts[3];
             String phone = parts[4];
             String newPassword = parts.length > 5 ? parts[5] : ""; // La contraseña es opcional
-
             Client client = dataClient.find(email); // Buscar usuario en JSON
             if (client == null) {
                 out.println("ERROR: Usuario no encontrado");
                 return;
             }
-
-            // Actualizar solo los datos que se permiten modificar
-            client.setFullName(fullName);
-            client.setAddress(address);
-            client.setPhone(phone);
-            if (!newPassword.isEmpty()) {
-                client.setPasswordHash(newPassword); // Si el usuario proporciona una nueva contraseña, se actualiza
-            }
-
-            dataClient.update(client); // Guardar cambios en JSON
+        
+            
+            Client temp = new Client(fullName, client.getId(), client.getEmail(), newPassword, address, phone);
+            
+            dataClient.update(temp); // Guardar cambios en JSON
             out.println("SUCCESS: Perfil actualizado correctamente");
-
         } catch (Exception e) {
             out.println("ERROR: No se pudo actualizar el perfil");
         }
     }
+    
+    private void handleGetProducts() {// Obtiene la lista de productos y la envía al cliente en formato JSON
+        try {
+            DataProduct dataProduct = new DataProduct();
+            List<Product> products = dataProduct.getList();
+            String jsonResponse = new ObjectMapper().writeValueAsString(products); // Convertimos la lista a JSON
+            out.println("PRODUCT_LIST;" + jsonResponse);
+        } catch (Exception e) {
+            out.println("ERROR: No se pudieron obtener los productos");
+        }
+    }
+    
 
+    
+    
     
 
 }
-
-
-
