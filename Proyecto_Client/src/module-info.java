@@ -1,4 +1,4 @@
-module ProyectoTiendaClient {
+module Proyecto_Client {
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires javafx.graphics;

@@ -63,18 +63,18 @@ public class ClientFunction {
                     String[] userData = response.substring(8).split(";"); 
                     try {
                         int userId = Integer.parseInt(userData[1]);  // Convertir ID a entero
-                        int userPhone = Integer.parseInt(userData[5]);  // Convertir TelÃ©fono a entero
+                        int userPhone = Integer.parseInt(userData[5]);  // Convertir Teléfono a entero
                         this.user = new User(userData[0], userId, userData[2], userData[3], userData[4], userPhone);
                         btn.setDisable(false);        
                         System.out.println("Usuario autenticado: " + user.toString());
                       
                     } catch (NumberFormatException e) {
-                        System.out.println("Error al convertir ID o TelÃ©fono: " + e.getMessage());
+                        System.out.println("Error al convertir ID o Teléfono: " + e.getMessage());
                     }
 
                     }else if (response.startsWith("ERROR:")) {
                     	notify(response, lblMessage);
-                        System.out.println("Error al iniciar sesiÃ³n: " + response);
+                        System.out.println("Error al iniciar sesión: " + response);
                         btn.setDisable(false);
                     }
                 

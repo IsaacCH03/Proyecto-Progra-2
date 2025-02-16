@@ -54,7 +54,7 @@ public class GUILoginController {
         System.out.println("salio");
         
         if(clientF.getUser() != null) {
-        	viewProfile();
+        	 openMenu();
         }
     }
 
@@ -118,11 +118,11 @@ public class GUILoginController {
         timeline.setCycleCount(1);
         timeline.play();
     }
-    private void viewProfile() {
+    private void openMenu() {
     	try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIViewProfile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIMainWindow.fxml"));
             Parent root = loader.load();
-            GUIViewProfileController controller = loader.getController();
+            GUIMainWindowController controller = loader.getController();
             
             controller.loadData(clientF);
             

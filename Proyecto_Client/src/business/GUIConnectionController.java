@@ -51,7 +51,7 @@ public class GUIConnectionController {
                 notify("Error en la conexion", "lblError");
             }
         } catch (NumberFormatException e) {
-            notify("Error: El puerto debe ser un nÃºmero vÃ¡lido.", "lblError");
+            notify("Error: El puerto debe ser un número válido.", "lblError");
         }
     }
 
@@ -74,7 +74,7 @@ public class GUIConnectionController {
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             stage.show();
             
-       //     stage.setOnCloseRequest(e -> controller.closeWindows());
+            stage.setOnCloseRequest(e -> controller.closeWindows());
             
             Stage temp = (Stage) this.btnConnection.getScene().getWindow();
             temp.close();

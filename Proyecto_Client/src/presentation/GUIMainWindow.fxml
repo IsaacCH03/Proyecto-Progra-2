@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="apMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.GUIMainWindowController">
+   <children>
+      <ImageView fitHeight="431.0" fitWidth="765.0" layoutX="-28.0" layoutY="-23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Img/istockphoto-1190188544-612x612.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTicoTech" alignment="TOP_CENTER" layoutX="198.0" layoutY="35.0" prefHeight="69.0" prefWidth="342.0" text="TicoTech">
+         <font>
+            <Font size="47.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8799999952316284" green="0.5170209407806396" blue="0.25519999861717224" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <ImageView fitHeight="77.0" fitWidth="86.0" layoutX="331.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Img/catalogar%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="101.0" fitWidth="96.0" layoutX="592.0" layoutY="267.0"  pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Img/entrega.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="85.0" layoutX="335.0" layoutY="281.0"  pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Img/estrella.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="77.0" fitWidth="77.0" layoutX="60.0" layoutY="277.0"  pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Img/perfil.png" />
+         </image>
+      </ImageView>
+   <Label fx:id="lblView" alignment="TOP_CENTER" layoutX="22.0" layoutY="363.0" onMouseClicked="#viewProfile" prefHeight="18.0" prefWidth="154.0" styleClass="labelOption" text="Ver perfil" />
+<Label fx:id="lblFavorite" alignment="TOP_CENTER" layoutX="287.0" layoutY="363.0" onMouseClicked="#openFavorites" prefHeight="18.0" prefWidth="167.0" styleClass="labelOption" text="Favoritos" />
+<Label fx:id="lblCart" alignment="TOP_CENTER" layoutX="570.0" layoutY="363.0" onMouseClicked="#openCart" prefHeight="18.0" prefWidth="141.0" styleClass="labelOption" text="Carrito" />
+<Label fx:id="lblcatalog" alignment="TOP_CENTER" layoutX="315.0" layoutY="249.0" onMouseClicked="#openCatalog" prefHeight="18.0" prefWidth="112.0" styleClass="labelOption" text="Catálogo" />
+
+
+   </children>
+</AnchorPane>

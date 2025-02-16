@@ -19,7 +19,7 @@
 
 /* Estilos de los campos de texto */
 TextField, PasswordField {
-	 -fx-border-color: #ff3333; /* Un rojo mï¿½s vibrante */
+	 -fx-border-color: #ff3333; /* Un rojo más vibrante */
     -fx-background-color: #2b2b2b;
     -fx-border-width: 2px;
   
@@ -40,13 +40,12 @@ Button {
     -fx-background-color: red;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-family: Cambria;
     
     -fx-border-color: red;
     -fx-border-width: 2px;
     
-    -fx-background-radius: 100;
-    -fx-border-radius: 30;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
 }
 
 /* Efecto hover en botones */
@@ -70,60 +69,80 @@ ImageView {
     -fx-background-insets: 5px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 3, 3);
 }
+.lblError{
+    -fx-text-fill:red;
+}
 
+.lblSucess{
+    -fx-text-fill:green;
+}
+.lblNotification{
+	-fx-text-fill: white;
+}
+#apMain{
+	-fx-background-color:linear-gradient(to top, #322724 , #e43b17);
+}
+#lblTicoTech {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 50px;
+    -fx-text-fill: linear-gradient(to bottom, #ffae00, #ffffff);
+    -fx-effect: dropshadow(gaussian, rgba(255, 69, 0, 0.8), 10, 0.5, 0, 0);
+    -fx-font-weight: bold;
+}
+/* Estilos generales para los labels */
+.labelOption {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 18px;
+    -fx-text-fill: linear-gradient(to right, #ff4500, #ffae00);
+    -fx-effect: dropshadow(gaussian, rgba(255, 69, 0, 0.8), 8, 0.5, 0, 2);
+    -fx-font-weight: bold;
+}
 
-    /* ////////////////////////////////////////////// Market ///////////////////////////////////////////  */
+/* Efecto hover para mejorar interacción */
+.labelOption:hover {
+    -fx-text-fill: linear-gradient(to right, #ffae00, #ffffff);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
+}
 .search-box{
     -fx-background-color:black;
     -fx-background-radius: 100;
 }
-
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
-
 .search-button{
     -fx-background-color: #828282;
     -fx-background-radius: 30;
 }
-
 .right-bar{
     -fx-background-color: #D3D3D3;
 }
-
 .shadow{
     -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
 }
-
 .chosen-fruit-card{
     -fx-background-color: black;
     -fx-background-radius: 30;
 }
-
 .comboBox{
     -fx-background-color: rgba(255,255,255,0.3);
     -fx-background-radius: 30;
 }
-
 .add-btn{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 100;
 }
-
 .free-delivery-card{
     -fx-background-color: #D3D3D3;
     -fx-background-radius: 30;
 }
-
 .shopping-online-card{
     -fx-background-color: #ffff;
     -fx-background-radius: 30;
 }
-
 .fruit-item{
     -fx-background-color: #FFFFFF;
         -fx-background-radius: 30;
 }
-
-
-

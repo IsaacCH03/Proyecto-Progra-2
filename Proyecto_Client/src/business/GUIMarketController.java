@@ -3,6 +3,8 @@ package business;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
@@ -23,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class GUIMarketController {
 	@FXML
@@ -58,6 +61,7 @@ public class GUIMarketController {
 	@FXML
 	private Button btnAddFav;
 	
+	ClientFunction clientF;
 	
 	
 	@FXML
@@ -69,42 +73,8 @@ public class GUIMarketController {
 	private List<Product> products = new ArrayList<>();
 
 	public void initialize() {
-	    ClientFunction clientFunction = new ClientFunction("localhost", 5000); // Ajusta la IP y puerto - aqui debe de configurarlo a como usted lo esta manejando
-	    products = clientFunction.getProducts(); // Obtiene la lista desde el servidor
-
-	    if (products.size() > 0) {//Si hay productos en la lista entonces se le asigna el primer producto a la tarjeta de producto seleccionada
-	        setChosenProduct(products.get(0));
-	        myListener = new MyListener() {//Se crea un objeto de la clase MyListener para poder asignarle un producto a la tarjeta de producto seleccionada
-	            @Override
-	            public void onClickListener(Product product) {
-	                setChosenProduct(product);
-	            }
-	        };
-	    }
-
-	    int column = 0;//
-	    int row = 1;
-
-	    try {
-	        for (Product product : products) {//Recorre la lista de productos y por cada producto crea una tarjeta de producto
-	            FXMLLoader fxmlLoader = new FXMLLoader();//Se crea un objeto de la clase FXMLLoader para cargar la interfaz de usuario
-	            fxmlLoader.setLocation(getClass().getResource("/presentation/GUIItem.fxml"));
-	            AnchorPane anchorPane = fxmlLoader.load();//Se carga la interfaz de usuario
-
-	            GUIItemController itemController = fxmlLoader.getController();//Se crea un objeto de la clase GUIItemController para poder asignarle los datos del producto
-	            itemController.setData(product, myListener);//Se le asigna el producto y el listener
-
-	            gridPane.add(anchorPane, column++, row);//Se agrega la tarjeta de producto al gridPane en la columna y fila correspondiente
-	            if (column == 3) { // MÃ¡ximo 3 por fila
-	                column = 0;
-	                row++;
-	            }
-
-	            GridPane.setMargin(anchorPane, new Insets(10));//Se le asigna un margen a la tarjeta de producto
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+		loadData(clientF);
+	  
 	}
 	// este metodo es para poder agregar un producto al catalogo en tiempo real pero no esta implementado (no pude)
 //	public void addNewProductToCatalog(Product product) {
@@ -173,4 +143,70 @@ public class GUIMarketController {
     public void addFav(ActionEvent event) {
 
     }
+    
+    public void loadData(ClientFunction clientF) {
+        this.clientF = clientF;
+
+        if (this.clientF == null) {
+            System.out.println("Error: clientF es NULL en GUIMarketController.");
+            return;
+        }
+
+        if (!clientF.getProducts().isEmpty()) {
+            products = clientF.getProducts();
+
+            if (products.size() > 0) {
+                setChosenProduct(products.get(0));
+                myListener = product -> setChosenProduct(product);
+            }
+
+            int column = 0;
+            int row = 1;
+
+            try {
+                for (Product product : products) {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/presentation/GUIItem.fxml"));
+                    AnchorPane anchorPane = fxmlLoader.load();
+
+                    GUIItemController itemController = fxmlLoader.getController();
+                    itemController.setData(product, myListener);
+
+                    gridPane.add(anchorPane, column++, row);
+                    if (column == 3) {
+                        column = 0;
+                        row++;
+                    }
+
+                    GridPane.setMargin(anchorPane, new Insets(10));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Catálogo vacío.");
+        }
+    }
+
+
+	public void closeWindows() {
+		 try {
+	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIMainWindow.fxml"));
+	            Parent root = loader.load();
+
+	            Scene scene = new Scene(root);
+	            Stage stage = new Stage();
+	            stage.setScene(scene);
+	            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	            stage.show();
+
+	            GUIMainWindowController controller = loader.getController();
+	            controller.loadData(clientF);
+
+	            Stage temp = (Stage) this.btnAddCart.getScene().getWindow();
+	            temp.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		
+	}
 }

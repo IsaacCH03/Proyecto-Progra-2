@@ -98,7 +98,7 @@ public class GUIViewProfileController {
 
 	public void closeWindows() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUILogin.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIMainWindow.fxml"));
 			Parent root = loader.load();
 
 			Scene scene = new Scene(root);
@@ -107,7 +107,7 @@ public class GUIViewProfileController {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.show();
 
-			GUILoginController controller = loader.getController();
+			GUIMainWindowController controller = loader.getController();
 			controller.loadData(clientF);
 
 			Stage temp = (Stage) this.btnSave.getScene().getWindow();
