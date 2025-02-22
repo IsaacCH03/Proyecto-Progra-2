@@ -6,16 +6,17 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import domain.Cart;
+import domain.FavProduct;
 import domain.Product;
+import domain.Utils;
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -23,190 +24,283 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GUIMarketController {
-	@FXML
-	private TextField tfSearch;
-	@FXML
-	private Button btnSearch;
-	@FXML
-	private VBox chosenProductCard;
-	@FXML
-	private Label lblNameProduct;
-	@FXML
-	private Label lblPriceProduct;
-	@FXML
-	private ImageView ivProduct;
-	@FXML
-	private Label lblIDproduct;
-	@FXML
-	private Label lblDescription;
-	@FXML
-	private Label lblStock;
-	@FXML
-	private Label lblCategory;
-	@FXML
-	private Label lblValue;
-	@FXML
-	private TextArea taComments;
-	@FXML
-	private Button btnAddCart;
-	@FXML
-	private Button btnMyAccount;
-	@FXML
-	private GridPane gridPane;
-	@FXML
-	private Button btnAddFav;
-	
-	ClientFunction clientF;
-	
-	
-	@FXML
-	private ScrollPane scrollPane;
-	private Image image;
-	
-	private MyListener myListener;
+    @FXML
+    private TextField tfSearch;
+    @FXML
+    private Button btnSearch;
+    @FXML
+    private VBox chosenProductCard;
+    @FXML
+    private Label lblNameProduct;
+    @FXML
+    private Label lblPriceProduct;
+    @FXML
+    private ImageView ivProduct;
+    @FXML
+    private Label lblIDproduct;
+    @FXML
+    private Label lblDescription;
+    @FXML
+    private Label lblStock;
+    @FXML
+    private Label lblCategory;
+    @FXML
+    private Label lblValue;
+    @FXML
+    private TextArea taComments;
+    @FXML
+    private Button btnAddCart;
+    @FXML
+    private Button btnMyAccount;
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private Button btnAddFav;
+    
+    @FXML
+    private Button btnBack;
 
-	private List<Product> products = new ArrayList<>();
+    private List<Product> cartProducts = new ArrayList<>();
+   
+    @FXML
+    private ScrollPane scrollPane;
+    private Image image;
+    private MyListener myListener;
+    private List<Product> products = new ArrayList<>();
 
-	public void initialize() {
-		loadData(clientF);
-	  
-	}
-	// este metodo es para poder agregar un producto al catalogo en tiempo real pero no esta implementado (no pude)
-//	public void addNewProductToCatalog(Product product) {
-//		 int column = 0;
-//		    int row = 1;
-//	    try {
-//	        FXMLLoader fxmlLoader = new FXMLLoader();
-//	        fxmlLoader.setLocation(getClass().getResource("/presentation/GUIItem.fxml"));
-//	        AnchorPane anchorPane = fxmlLoader.load();
-//
-//	        GUIItemController itemController = fxmlLoader.getController();
-//	        itemController.setData(product, myListener);
-//
-//	        gridPane.add(anchorPane, column++, row);
-//	        if (column == 3) { // Máximo 3 por fila
-//	            column = 0;
-//	            row++;
-//	        }
-//
-//	        GridPane.setMargin(anchorPane, new Insets(10));
-//	    } catch (IOException e) {
-//	        e.printStackTrace();
-//	    }
-//	}
+    @FXML
+    public void initialize() {
+     
+        System.out.println("✅ clientF inicializado correctamente en GUIMarketController.");
+        
+        loadData();
+        loadProducts();
+    }
 
 
-	
-	private void setChosenProduct(Product product) {// metodo para asignar un producto a la tarjeta de producto seleccionada
-		lblNameProduct.setText(product.getName());
-		lblPriceProduct.setText("₡" + product.getPrice());
-		String imagePath = product.getUrlImage();
-		if (!imagePath.startsWith("file:")) {//Si no es una ruta de archivo local entonces se le agrega el "file:" para que la imagen se pueda cargar 
-		    imagePath = "file:" + imagePath;//Se le agrega el "file:" a la ruta de la imagen
-		}
-		Image image = new Image(imagePath);
-		ivProduct.setImage(image);
-		lblIDproduct.setText(product.getIdProduct());
-		lblDescription.setText(product.getDescription());
-		lblStock.setText(""+product.getStock());
-		lblCategory.setText(product.getCategory());
-		lblValue.setText(""+product.getValue());
-		
-	}
-	
+    private void setChosenProduct(Product product) {
+        lblNameProduct.setText(product.getName());
+        lblPriceProduct.setText("" + product.getPrice());
+        String imagePath = product.getUrlImage();
+        if (!imagePath.startsWith("file:")) {
+            imagePath = "file:" + imagePath;
+        }
+        Image image = new Image(imagePath);
+        ivProduct.setImage(image);
+        lblIDproduct.setText(product.getIdProduct());
+        lblDescription.setText(product.getDescription());
+        lblStock.setText("" + product.getStock());
+        lblCategory.setText(product.getCategory());
+        lblValue.setText("" + product.getValue());
+        String text = LogicComment.getComment(Utils.clientF.getUser().getId(), product);
+        taComments.setText(text);
+    }
 
-	// Event Listener on Button[#btnSearch].onAction
-	@FXML
-	public void searchProduct(ActionEvent event) {
-		// TODO Autogenerated
-	}
+    @FXML
+    public void searchProduct(ActionEvent event) {
+        // TODO Autogenerated
+    }
 
-	// Event Listener on Button[#btnAddCart].onAction
-	@FXML
-	public void addCart(ActionEvent event) {
-		// TODO Autogenerated
-	}
+    @FXML
+    public void addCart(ActionEvent event) {
+        int userId = Utils.clientF.getUser().getId();
+        String id = lblIDproduct.getText();
+        String name = lblNameProduct.getText();
+        String description = lblDescription.getText();
+        double price = Double.parseDouble(lblPriceProduct.getText());
+        int stock = 0;
+        String category = lblCategory.getText();
+        String url = ivProduct.getImage().getUrl();
+        Product product = new Product(id, name, description, price, stock, category, url);
+        if(Utils.clientF.getUser().getCart() == null) {
+        	Cart cart = new Cart();
+        	Utils.clientF.getUser().setCart(cart);
+        }
+        if(!LogicCart.exitsCart(Utils.clientF.getUser().getCart().getList(), product)) {
+        	Utils.clientF.addProductToCart(userId, product);
+        	 System.out.println("Producto agregado al carrito: " + product.getName());
+        	 Utils.clientF.openCart();
+        }else {
+        		 System.out.println("Ya existe el carrito");
+        	 }
+        
+       
+    }
 
-	// Event Listener on Button[#btnMyAccount].onAction
-	@FXML
-	public void windowMyAccount(ActionEvent event) {
-		// TODO Autogenerated
-	}
-	
+    @FXML
+    public void windowMyAccount(ActionEvent event) {
+        // TODO Autogenerated
+    }
 
     @FXML
     public void addFav(ActionEvent event) {
+        if (Utils.clientF == null) {
+            System.out.println("Error: clientF es NULL en GUIMarketController. No se puede agregar a favoritos.");
+            return;
+        }
 
+        if (Utils.clientF.getUser() == null) {
+            System.out.println("Error: No hay un usuario autenticado.");
+            return;
+        }
+
+        if (lblIDproduct.getText().isEmpty()) {
+            System.out.println("Error: No hay un producto seleccionado.");
+            return;
+        }
+
+        String productId = lblIDproduct.getText();
+     //   Product product = clientF.findProductById(productId);
+        Product product =Utils. clientF.findProductById(productId);
+
+        if (product == null) {
+            System.out.println("Error: No se pudo encontrar el producto.");
+            return;
+        }
+
+      //  FavProduct favProduct = new FavProduct(clientF.getUser().getId(), product, new Date());
+        FavProduct favProduct = new FavProduct(Utils.clientF.getUser().getId(), product, new Date());
+
+        // Verificar si el producto ya está en favoritos
+        boolean exists = false;
+        for (FavProduct existingFav : Utils.clientF.getUser().getFavProducts()) {
+            if (existingFav.getProduct().getIdProduct().equals(favProduct.getProduct().getIdProduct())) {
+                exists = true;
+                break;
+            }
+        }
+
+        if (!exists) {
+            Utils.clientF.getUser().getFavProducts().add(favProduct);
+            Utils.clientF.sendFavProduct(Utils.clientF.getUser().getId(), favProduct);
+            System.out.println("Producto favorito enviado al servidor.");
+        } else {
+            System.out.println("El producto ya está en favoritos.");
+        }
     }
-    
-    public void loadData(ClientFunction clientF) {
-        this.clientF = clientF;
 
-        if (this.clientF == null) {
+    public void loadData() {
+        
+        if (Utils.clientF == null) {
             System.out.println("Error: clientF es NULL en GUIMarketController.");
             return;
         }
 
-        if (!clientF.getProducts().isEmpty()) {
-            products = clientF.getProducts();
+//        if (!Utils.clientF.getProducts().isEmpty()) {
+//            products = Utils.clientF.getProducts();
+//            if (products.size() > 0) {
+//                setChosenProduct(products.get(0));
+//                myListener = product -> setChosenProduct(product);
+//            }
+//
+//            int column = 0;
+//            int row = 1;
+//
+//            try {
+//                for (Product product : products) {
+//                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/presentation/GUIItem.fxml"));
+//                    AnchorPane anchorPane = fxmlLoader.load();
+//
+//                    GUIItemController itemController = fxmlLoader.getController();
+//                    itemController.setData(product, myListener);
+//
+//                    gridPane.add(anchorPane, column++, row);
+//                    if (column == 3) {
+//                        column = 0;
+//                        row++;
+//                    }
+//
+//                    GridPane.setMargin(anchorPane, new Insets(10));
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            System.out.println("Catálogo vacío.");
+//        }
+    }
+    
+    
+    @FXML
+	public void backWindow(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIMainWindow.fxml"));
+			Parent root = loader.load();
 
-            if (products.size() > 0) {
-                setChosenProduct(products.get(0));
-                myListener = product -> setChosenProduct(product);
-            }
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.show();
 
-            int column = 0;
-            int row = 1;
+			GUIMainWindowController controller = loader.getController();
+		
 
-            try {
-                for (Product product : products) {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/presentation/GUIItem.fxml"));
-                    AnchorPane anchorPane = fxmlLoader.load();
+			Stage temp = (Stage) this.btnBack.getScene().getWindow();
+			temp.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    public void closeWindows() {
+   	 try {
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIMainWindow.fxml"));
+              Parent root = loader.load();
 
-                    GUIItemController itemController = fxmlLoader.getController();
-                    itemController.setData(product, myListener);
+              Scene scene = new Scene(root);
+              Stage stage = new Stage();
+              stage.setScene(scene);
+              scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+              stage.show();
 
-                    gridPane.add(anchorPane, column++, row);
-                    if (column == 3) {
-                        column = 0;
-                        row++;
-                    }
+              GUIMainWindowController controller = loader.getController();
+         
 
-                    GridPane.setMargin(anchorPane, new Insets(10));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Cat�logo vac�o.");
-        }
+
+              Stage temp = (Stage) this.btnAddCart.getScene().getWindow();
+              temp.close();
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+   	
+   }
+    public void loadProducts() {
+    	 if (!Utils.listProducts.isEmpty()) {
+             products = Utils.listProducts;
+             if (products.size() > 0) {
+                 setChosenProduct(products.get(0));
+                 myListener = product -> setChosenProduct(product);
+             }
+
+             int column = 0;
+             int row = 1;
+
+             try {
+                 for (Product product : products) {
+                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/presentation/GUIItem.fxml"));
+                     AnchorPane anchorPane = fxmlLoader.load();
+
+                     GUIItemController itemController = fxmlLoader.getController();
+                     itemController.setData(product, myListener);
+
+                     gridPane.add(anchorPane, column++, row);
+                     if (column == 3) {
+                         column = 0;
+                         row++;
+                     }
+
+                     GridPane.setMargin(anchorPane, new Insets(10));
+                 }
+             } catch (IOException e) {
+                 e.printStackTrace();
+             }
+         } else {
+             System.out.println("Catálogo vacío.");
+         }
     }
 
-
-	public void closeWindows() {
-		 try {
-	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIMainWindow.fxml"));
-	            Parent root = loader.load();
-
-	            Scene scene = new Scene(root);
-	            Stage stage = new Stage();
-	            stage.setScene(scene);
-	            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-	            stage.show();
-
-	            GUIMainWindowController controller = loader.getController();
-	            controller.loadData(clientF);
-
-	            Stage temp = (Stage) this.btnAddCart.getScene().getWindow();
-	            temp.close();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-		
-	}
 }

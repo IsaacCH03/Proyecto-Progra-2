@@ -34,8 +34,8 @@ public class GUIItemController {
 		lblNameProduct.setText(product.getName());
 		lblPrice.setText("₡"+ product.getPrice());
 		String imagePath = product.getUrlImage();
-		if (!imagePath.startsWith("file:")) {
-		    imagePath = "file:" + imagePath;
+		if (!imagePath.startsWith("file:")) {//si la imagen no esta en el archivo
+		    imagePath = "file:" + imagePath;//se le agrega el file: para que se pueda leer
 		}
 		Image image = new Image(imagePath);
 		ivProduct.setImage(image);

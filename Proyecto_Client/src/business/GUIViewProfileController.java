@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import domain.Utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -41,11 +42,11 @@ public class GUIViewProfileController {
 	@FXML
 	private Label lblMessage;
 
-	ClientFunction clientF;
+	
 
 	@FXML
 	public void initialize() {
-		loadData(clientF);
+		loadData();
 	}
 
 	@FXML
@@ -74,23 +75,24 @@ public class GUIViewProfileController {
 	    String phone = tfPhone.getText();
 	    String password = pfPassword.isVisible() ? pfPassword.getText() : tfVisiblePassword.getText();
 
-	    String message = clientF.updateProfile(fullName, address, phone, password);
+	    String message = Utils.clientF.updateProfile(fullName, address, phone, password);
 	    notify(message, "lblNotification");
 
 	    updateUser();
 	}
 
-	public void loadData(ClientFunction clientF) {
-		this.clientF = clientF;
+	public void loadData() {
+		
 
 		// Asegurarse de que el usuario no sea null antes de asignar datos
-		if (clientF != null && clientF.getUser() != null) {
-			tfFullName.setText(clientF.getUser().getFullName());
-			tfId.setText(clientF.getUser().getId() + "");
-			tfMail.setText(clientF.getUser().getMail());
-			tfAddress.setText(clientF.getUser().getAddress());
-			tfPhone.setText(clientF.getUser().getPhone() + "");
-			pfPassword.setText(clientF.getUser().getPassword());
+		if (Utils.clientF != null && Utils.clientF.getUser() != null) {
+			tfFullName.setText(Utils.clientF.getUser().getFullName());
+			System.out.println(Utils.clientF.getUser().getFullName());
+			tfId.setText(Utils.clientF.getUser().getId() + "");
+			tfMail.setText(Utils.clientF.getUser().getMail());
+			tfAddress.setText(Utils.clientF.getUser().getAddress());
+			tfPhone.setText(Utils.clientF.getUser().getPhone() + "");
+			pfPassword.setText(Utils.clientF.getUser().getPassword());
 		} else {
 			System.out.println("Advertencia: clientF o clientF.getUser() es null.");
 		}
@@ -108,7 +110,7 @@ public class GUIViewProfileController {
 			stage.show();
 
 			GUIMainWindowController controller = loader.getController();
-			controller.loadData(clientF);
+		
 
 			Stage temp = (Stage) this.btnSave.getScene().getWindow();
 			temp.close();
@@ -128,18 +130,18 @@ public class GUIViewProfileController {
 	}
 
 	private void updateUser() {
-		clientF.getUser().setFullName(tfFullName.getText());
-		clientF.getUser().setAddress(tfAddress.getText());
-	    clientF.getUser().setPassword(tfVisiblePassword.getText());
+		Utils.clientF.getUser().setFullName(tfFullName.getText());
+		Utils.clientF.getUser().setAddress(tfAddress.getText());
+		Utils.clientF.getUser().setPassword(tfVisiblePassword.getText());
 		
-		clientF.getUser().setPhone(Integer.parseInt(tfPhone.getText()));
+		Utils.clientF.getUser().setPhone(Integer.parseInt(tfPhone.getText()));
 
-		tfFullName.setText(clientF.getUser().getFullName());
-		tfId.setText(clientF.getUser().getId() + "");
-		tfMail.setText(clientF.getUser().getMail());
-		tfAddress.setText(clientF.getUser().getAddress());
-		tfPhone.setText(clientF.getUser().getPhone() + "");
-		pfPassword.setText(clientF.getUser().getPassword());
+		tfFullName.setText(Utils.clientF.getUser().getFullName());
+		tfId.setText(Utils.clientF.getUser().getId() + "");
+		tfMail.setText(Utils.clientF.getUser().getMail());
+		tfAddress.setText(Utils.clientF.getUser().getAddress());
+		tfPhone.setText(Utils.clientF.getUser().getPhone() + "");
+		pfPassword.setText(Utils.clientF.getUser().getPassword());
 	}
 	private boolean validateFields() {
 	    if (tfFullName.getText().trim().isEmpty() ||

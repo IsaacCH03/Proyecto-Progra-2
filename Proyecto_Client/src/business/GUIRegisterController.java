@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import domain.User;
+import domain.Utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -38,15 +39,20 @@ public class GUIRegisterController {
     @FXML
     private Label setMessage;
 
-    private ClientFunction clientF;
+    
 
     @FXML
     public void register(ActionEvent event) {
         if (!validateFields()) {
-            notify("Error: Todos los campos son obligatorios.", "errorLabel");
+            notify("Error: Todos los campos son obligatorios.", "lblError");
             return;
         }
-        
+
+        if (!isValidEmail(tfMail.getText())) {
+            notify("Error: Correo inv√°lido. Ingrese un correo v√°lido.", "lblError");
+            return;
+        }
+
         try {
             String fullName = tfFullName.getText();
             int id = Integer.parseInt(tfId.getText());
@@ -55,12 +61,14 @@ public class GUIRegisterController {
             String address = tfAddress.getText();
             int phone = Integer.parseInt(tfPhone.getText());
 
-            User user = new User(fullName, id, mail, password, address, phone);
-            clientF.sendRecord(user,setMessage);
+            User user = new User(fullName, id, mail, password, address, phone, null);
+            Utils.clientF.sendRecord(user, setMessage);
+            clearFields();
         } catch (NumberFormatException e) {
-            notify("Error: ID y TelÈfono deben ser n˙meros v·lidos.", "lblError");
+            notify("Error: ID y Tel√©fono deben ser n√∫meros v√°lidos.", "lblError");
         }
     }
+
 
     private boolean validateFields() {
         return !tfFullName.getText().isEmpty() &&
@@ -71,9 +79,7 @@ public class GUIRegisterController {
                !tfPhone.getText().isEmpty();
     }
 
-    public void loadData(ClientFunction clientF) {
-        this.clientF = clientF;
-    }
+   
 
     public void closeWindows() {
         try {
@@ -86,9 +92,7 @@ public class GUIRegisterController {
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             stage.show();
 
-            GUILoginController controller = loader.getController();
-            controller.loadData(clientF);
-
+        
             Stage temp = (Stage) this.btnRegister.getScene().getWindow();
             temp.close();
         } catch (Exception e) {
@@ -114,4 +118,9 @@ public class GUIRegisterController {
         tfAddress.clear();
         tfPhone.clear();
     }
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(emailRegex);
+    }
+
 }

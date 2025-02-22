@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import domain.Product;
+import domain.Utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -32,8 +36,6 @@ public class GUILoginController {
     @FXML
     private Label setMessage;
 
-    private ClientFunction clientF;
-
     @FXML
     public void login(ActionEvent event) {
         if (!validateFields()) {
@@ -44,16 +46,20 @@ public class GUILoginController {
         String mail = tfMail.getText();
         String pass = pfPassword.getText();
         btnLogin.setDisable(true);
-        clientF.setUser(null);
-        clientF.login(mail, pass, setMessage, btnLogin);
+        Utils.clientF.setUser(null);
+        Utils.clientF.login(mail, pass, setMessage, btnLogin);
         
       
         while(btnLogin.isDisable()) {
-        	System.out.println("hola");
+        
         }
         System.out.println("salio");
         
-        if(clientF.getUser() != null) {
+        if(Utils.clientF.getUser() != null) {
+        	Utils.clientF.setUser(Utils.clientF.getUser());
+        	Utils.listProducts = (ArrayList<Product>) Utils.clientF.getProducts();
+        	Utils.clientF.openCart();
+        	Utils.clientF.getFavProducts(Utils.clientF.getUser().getId());
         	 openMenu();
         }
     }
@@ -68,7 +74,7 @@ public class GUILoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIRegister.fxml"));
             Parent root = loader.load();
             GUIRegisterController controller = loader.getController();
-            controller.loadData(clientF);
+      
             
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -85,10 +91,7 @@ public class GUILoginController {
         }
     }
 
-    public void loadData(ClientFunction clientF) {
-        this.clientF = clientF;
-    }
-
+  
     public void closeWindows() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/presentation/GUIConnection.fxml"));
@@ -124,8 +127,7 @@ public class GUILoginController {
             Parent root = loader.load();
             GUIMainWindowController controller = loader.getController();
             
-            controller.loadData(clientF);
-            
+           
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -142,7 +144,7 @@ public class GUILoginController {
     }
     public  void waitLogin() {
     	while (true) {
-    		if(clientF != null) {
+    		if(Utils.clientF != null) {
     			return;
     		}
     	}

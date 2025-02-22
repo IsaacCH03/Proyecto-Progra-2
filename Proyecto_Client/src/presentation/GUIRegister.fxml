@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="myAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="business.GUIRegisterController">
+<AnchorPane fx:id="myAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.GUIRegisterController">
    <children>
       <Pane fx:id="pM" layoutX="90.0" layoutY="37.0" prefHeight="415.0" prefWidth="467.0">
          <children>
@@ -31,7 +30,7 @@ fx:controller="business.GUIRegisterController">
                   <Image url="@../../Img/perfil-del-usuario%20(3).png" />
                </image>
             </ImageView>
-            <Label fx:id="setMessage" layoutX="107.0" layoutY="384.0" prefHeight="17.0" prefWidth="239.0" />
+            <Label fx:id="setMessage" layoutX="107.0" layoutY="384.0" prefHeight="17.0" prefWidth="239.0" textFill="WHITE" />
          </children>
       </Pane>
    </children>

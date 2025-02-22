@@ -11,6 +11,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
+import domain.Utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -29,7 +30,7 @@ public class GUIConnectionController {
     @FXML
     private Button btnEnter;
 
-    private ClientFunction clientF;
+
 
     @FXML
     public void connection(ActionEvent event) {
@@ -41,9 +42,9 @@ public class GUIConnectionController {
         try {
             String ip = tfIp.getText();
             int port = Integer.parseInt(tfPort.getText());
-            clientF = new ClientFunction(ip, port);
-            
-            if (clientF.getSocket().isConnected()) {
+       
+            Utils utils = new Utils(ip,port);
+            if (Utils.clientF.getSocket().isConnected()) {
                 btnEnter.setDisable(false);
                 btnConnection.setDisable(true);
                 notify("Conexion exitosa", "lblSucess");
@@ -51,7 +52,7 @@ public class GUIConnectionController {
                 notify("Error en la conexion", "lblError");
             }
         } catch (NumberFormatException e) {
-            notify("Error: El puerto debe ser un número válido.", "lblError");
+            notify("Error: El puerto debe ser un nÃºmero vÃ¡lido.", "lblError");
         }
     }
 
@@ -66,8 +67,7 @@ public class GUIConnectionController {
             Parent root = loader.load();
             GUILoginController controller = loader.getController();
             
-            controller.loadData(clientF);
-            
+  
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);

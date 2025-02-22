@@ -15,19 +15,27 @@ public class Product {
     private String category;
     private int value; // 1 es malo, 2 es regular, 3 es bueno, 4 es muy bueno, 5 es excelente
     private String urlImage;
-    private String color;
-    
-    
+    private ArrayList<Comment> listComments;
     
     public Product() {
-    	 
+    	this.listComments = new ArrayList<>();
     }
     
 
-    
+    public Product(String idProduct, String name, String description, double price, int stock, String category,
+			String urlImage) {
+		this.idProduct = idProduct;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.stock = stock;
+		this.category = category;
+		this.urlImage = urlImage;
+		this.listComments = new ArrayList<>();
+	}
 
-    public Product(String name, String description, double price, int stock, String category, String urlImage) {
-		super();
+
+	public Product(String name, String description, double price, int stock, String category, String urlImage) {
 		this.idProduct = generateUniqueID();
 		this.name = name;
 		this.description = description;
@@ -35,6 +43,7 @@ public class Product {
 		this.stock = stock;
 		this.category = category;
 		this.urlImage = urlImage;
+		this.listComments = new ArrayList<>();
 	}
 
 	public Product(String name, String description, double price, int stock, String category,
@@ -47,6 +56,7 @@ public class Product {
         this.category = category;
         this.value = value;
         this.urlImage = urlImage;
+        this.listComments = new ArrayList<>();
     }
 
     private String generateUniqueID() {
@@ -54,21 +64,6 @@ public class Product {
         int uniqueID = 10000 + random.nextInt(90000); // Genera un número entre 10000 y 99999
         return String.valueOf(uniqueID);
     }
-
-    
-    
-    public String getColor() {
-		return color;
-	}
-
-
-
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-
 
 
 	public String getIdProduct() {
@@ -100,9 +95,6 @@ public class Product {
     }
     
     
-
-
-
     public void setIdProduct() {
 		this.idProduct = generateUniqueID();
 	}
@@ -162,20 +154,25 @@ public class Product {
 	public String getUrlImage() {
         return urlImage;
     }
+	
+	
 
-    @Override
+    public ArrayList<Comment> getListComments() {
+		return listComments;
+	}
+
+
+	public void setListComments(ArrayList<Comment> listComments) {
+		this.listComments = listComments;
+	}
+
+
+	@Override
     public String toString() {
-        return "Product{" +
-                "idProduct='" + idProduct + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                ", category='" + category + '\'' +
-                ", value=" + value +
-                ", urlImage='" + urlImage + '\'' +
-                '}';
+        return name;
     }
-
+public String toString2() {
+	return idProduct + "," + name+ "," + description + "," + price + "," + stock + "," + category + "," + urlImage; 
+}
 
 }

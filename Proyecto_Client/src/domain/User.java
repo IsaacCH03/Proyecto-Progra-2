@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 	
 	private String fullName;
@@ -8,15 +11,22 @@ public class User {
 	private String password;
 	private String address;
 	private int phone;
+	private Cart cart;
+	private List<FavProduct> favProducts;
 	
-	public User(String fullName, int id, String mail, String password, String address, int phone) {
+	public User(String fullName, int id, String mail, String password, String address, int phone, Cart cart) {
 		this.fullName = fullName;
 		this.id = id;
 		this.mail = mail;
 		this.password = password;
 		this.address = address;
 		this.phone = phone;
+		this.cart = cart;
+		this.favProducts = new ArrayList<>();
 	}
+	
+	
+
 
 	public String getFullName() {
 		return fullName;
@@ -65,13 +75,35 @@ public class User {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
+	public List<FavProduct> getFavProducts() {
+	    return favProducts;
+	}
 
 	@Override
 	public String toString() {
 		return fullName + ";" + id + ";" + mail + ";" + password + ";"
 				+ address + ";" + phone;
 	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+
+
+
+	public void setFavProducts(List<FavProduct> favProducts) {
+		this.favProducts = favProducts;
+	}
 	
+
+
+
+
 	
 
 }

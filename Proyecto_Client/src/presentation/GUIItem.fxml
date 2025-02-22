@@ -20,7 +20,7 @@
 								<Font name="Cambria" size="18.0" />
 							</font>
 						</Label>
-						<Label fx:id="lblPrice" prefHeight="49.0" prefWidth="103.0" text="₡420000">
+						<Label fx:id="lblPrice" prefHeight="49.0" prefWidth="103.0" text="420000">
 							<font>
 								<Font name="Cambria Bold" size="14.0" />
 							</font>

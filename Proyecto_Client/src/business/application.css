@@ -2,6 +2,48 @@
 .root {
     -fx-background-color: #2b2b2b;
 }
+#panCenter {
+    -fx-background-color: white;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}
+
+/* Estilo del panel derecho */
+#panRight {
+    -fx-background-color: white;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}
+.tfCart {
+    -fx-border-color: #b11212 ;
+    -fx-background-color: #FFFF;
+    -fx-border-width: 2px;
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: gray;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-pref-width: 110px; /* Ajusta el ancho */
+    -fx-pref-height: 25px;
+    
+}
+
+/* Estilo para los botones */
+.btnCart {
+    -fx-background-color: #b11212 ;
+    -fx-text-fill: white;
+    -fx-border-color: #b11212;
+    -fx-border-width: 2px;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+.white {
+    -fx-background-color: #FFFF;
+}
+.lblWhite{
+	-fx-text-fill: white;
+}
 
 /* Pane principal con bordes visibles */
 #pMajor {
@@ -19,7 +61,7 @@
 
 /* Estilos de los campos de texto */
 TextField, PasswordField {
-	 -fx-border-color: #ff3333; /* Un rojo más vibrante */
+	 -fx-border-color: #ff3333; /* Un rojo mï¿½s vibrante */
     -fx-background-color: #2b2b2b;
     -fx-border-width: 2px;
   
@@ -82,6 +124,9 @@ ImageView {
 #apMain{
 	-fx-background-color:linear-gradient(to top, #322724 , #e43b17);
 }
+.panGradient{
+	-fx-background-color:linear-gradient(to top, #322724 , #e43b17);
+}
 #lblTicoTech {
     -fx-font-family: "Arial Black";
     -fx-font-size: 50px;
@@ -98,7 +143,7 @@ ImageView {
     -fx-font-weight: bold;
 }
 
-/* Efecto hover para mejorar interacción */
+/* Efecto hover para mejorar interacciï¿½n */
 .labelOption:hover {
     -fx-text-fill: linear-gradient(to right, #ffae00, #ffffff);
     -fx-scale-x: 1.1;
@@ -145,4 +190,74 @@ ImageView {
 .fruit-item{
     -fx-background-color: #FFFFFF;
         -fx-background-radius: 30;
+}
+.table-view {
+    -fx-background-radius: 20px;  /* Redondeo general */
+    -fx-border-radius: 20px;  /* Bordes redondeados */
+    -fx-border-color: black;  /* Color del borde */
+    -fx-border-width: 2px;  /* Grosor del borde */
+    -fx-background-insets: 0; /* Evita que el color de fondo sobresalga */
+    -fx-padding: 5px;
+}
+
+.table-view {
+    -fx-background-radius: 20px; /* Bordes redondeados en toda la tabla */
+    -fx-border-radius: 20px; /* Bordes redondeados del borde */
+    -fx-border-color: black; /* Color del borde */
+    -fx-border-width: 2px; /* Grosor del borde */
+    -fx-background-insets: 0;
+    -fx-padding: 5px;
+}
+
+/* Estilo para la tabla */
+.table-view {
+    -fx-background-radius: 20px; /* Bordes redondeados */
+    -fx-border-radius: 20px; /* Bordes redondeados del borde */
+    -fx-border-color: black; /* Color del borde */
+    -fx-border-width: 2px; /* Grosor del borde */
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+/* Ajustar la cabecera de la tabla para que llene toda la fila y elimine las esquinas blancas */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to top, #e43b17, #322724) !important;
+    -fx-background-radius: 20px 20px 0px 0px; /* Redondeo superior */
+    -fx-border-radius: 20px 20px 0px 0px;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+/* Estilo para las columnas */
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+/* Texto de las cabeceras */
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER; /* Asegura que el texto estï¿½ centrado */
+}
+
+/* Celdas de la tabla */
+.table-row-cell {
+    -fx-background-color: white; /* Fondo blanco para filas */
+    -fx-border-color: transparent; /* Elimina bordes internos */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9; /* Alterna colores para mejorar la lectura */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #e43b17; /* Color cuando se selecciona */
+    -fx-text-fill: white;
+}
+
+/* Ajustar bordes de la tabla para que coincidan con el fondo */
+.table-view .corner {
+    -fx-background-radius: 20px; /* Redondear las esquinas */
+    -fx-background-color: transparent;
 }
