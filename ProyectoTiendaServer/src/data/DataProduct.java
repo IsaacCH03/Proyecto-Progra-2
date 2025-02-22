@@ -54,5 +54,14 @@ public class DataProduct {
 		System.out.println("El producto no existe");// aqui se envia el
 		return null;
 	}
+	
+	public Product searchProduct(String idProduct) {
+		for(Product myProduct : getList()) {
+			if(myProduct.getIdProduct().equals(idProduct)) {
+				return myProduct;
+			}
+		}
+		return null;
+	}
 
 }

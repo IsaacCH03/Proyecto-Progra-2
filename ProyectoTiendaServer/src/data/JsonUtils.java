@@ -21,7 +21,7 @@ public class JsonUtils<T> {//clase generica
 		
 		List<T> list = getElements((Class<T>)t.getClass());
 		list.add(t);
-		mapper.writeValue(new File(this.filePath), list);
+		mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.filePath), list);
 		
 	}
 	
@@ -41,7 +41,7 @@ public class JsonUtils<T> {//clase generica
 	}
 	//metodo para guardar una lista de objetos en un archivo Json
 	public void saveList(List<T> list) throws Exception {
-	    mapper.writeValue(new File(this.filePath), list);
+		mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.filePath), list);
 	}
 
 	
@@ -61,12 +61,24 @@ public class JsonUtils<T> {//clase generica
 		for (T t : list) {
 			if (t.toString().equals(name)) {
 				list.remove(t);
-				mapper.writeValue(new File(this.filePath), list);
+				mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.filePath), list);
 				return t;
 			}
 		}
 		return null;
 	}
+	public T removeElement(int id, Class<T> temp) throws Exception {
+		List<T> list = getElements(temp);
+		for (T t : list) {
+			if (t.toString().equals(id)) {
+				list.remove(t);
+				mapper.writerWithDefaultPrettyPrinter().writeValue(new File(this.filePath), list);
+				return t;
+			}
+		}
+		return null;
+	}
+	
 	
 	
 	public T readElement(String name, Class<T> temp) throws Exception {

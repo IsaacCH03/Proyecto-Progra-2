@@ -38,6 +38,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class GUICrudProductController {
 	@FXML
@@ -76,6 +77,8 @@ public class GUICrudProductController {
 	private TableView<Product> tvShowProduct;
 	@FXML
 	private TableColumn<Product, String> tcIdProduct;
+	@FXML
+	private Label lblMessage;
 
 	@FXML
 	private TableColumn<Product, String> tcNameProduct;
@@ -88,9 +91,6 @@ public class GUICrudProductController {
 	private TableColumn<Product, Integer> tcStock;
 	@FXML
 	private TableColumn<Product, String> tcCategory;
-	
-	 @FXML
-	 private Label lblMessage;
 
 	private Product editProduct;
 
@@ -156,10 +156,8 @@ public class GUICrudProductController {
 	            relativePath = "Img/" + selectedFile.getName(); // Si no encuentra la carpeta, usa el nombre del archivo
 	        }
 
-	        // Configura la imagen seleccionada en el ImageView con la ruta RELATIVA
 	        ivImageProduct.setImage(new Image("file:" + relativePath));
 
-	        // Guardar solo la ruta relativa
 	        System.out.println("Imagen seleccionada: " + relativePath);
 	    }
 	}
@@ -169,20 +167,24 @@ public class GUICrudProductController {
 	// Event Listener on Button[#btnSaveProduct].onAction
 	@FXML
 	public void saveProduct(ActionEvent event) {
-		String name = tfNameProduct.getText();
-		String description = taDescriptionProduct.getText();
-		double price = Double.parseDouble(tfPrice.getText());
-		int stock = Integer.parseInt(tfStock.getText());
-		String category = tfCategory.getText();
-		String imagePath = ivImageProduct.getImage() != null ? ivImageProduct.getImage().getUrl() : "";
-
-		Product product = new Product(name, description, price, stock, category, imagePath);
-		DataProduct dataProduct = new DataProduct();
-		dataProduct.save(product, editProduct);
 		
-		tvShowProduct.getItems().add(product);
+		if (validForm()) {
+			String name = tfNameProduct.getText();
+			String description = taDescriptionProduct.getText();
+			double price = Double.parseDouble(tfPrice.getText());
+			int stock = Integer.parseInt(tfStock.getText());
+			String category = tfCategory.getText();
+			String imagePath = ivImageProduct.getImage() != null ? ivImageProduct.getImage().getUrl() : "";
 
-		clearFields();
+			Product product = new Product(name, description, price, stock, category, imagePath);
+			DataProduct dataProduct = new DataProduct();
+			dataProduct.save(product, editProduct);
+			lblMessage.setText("Producto guardado");
+			
+			tvShowProduct.getItems().add(product);
+
+			clearFields();
+		}
 
 	}
 	
@@ -248,6 +250,54 @@ public class GUICrudProductController {
 			}
 		});
 	}
+	
+	private boolean validForm() {
+	    // Validar campos vacíos
+	    if (tfNameProduct.getText().isEmpty() || taDescriptionProduct.getText().isEmpty() || tfPrice.getText().isEmpty()
+	            || tfStock.getText().isEmpty() || tfCategory.getText().isEmpty()) {
+	        lblMessage.setText("Faltan campos por llenar");
+	        return false;
+	    }
+
+	    // Validar imagen seleccionada
+	    if (ivImageProduct.getImage() == null) {
+	        lblMessage.setText("Seleccione una imagen");
+	        return false;
+	    }
+	    
+	    if (!tfCategory.getText().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+")) {
+	        lblMessage.setText("La categoría solo puede contener letras y espacios");
+	        return false;
+	    }
+
+
+	    // Validar que el precio sea un número decimal válido
+	    try {
+	        double price = Double.parseDouble(tfPrice.getText());
+	        if (price < 0) {
+	            lblMessage.setText("El precio no puede ser negativo");
+	            return false;
+	        }
+	    } catch (NumberFormatException e) {
+	        lblMessage.setText("El precio debe ser un número válido");
+	        return false;
+	    }
+
+	    // Validar que el stock sea un número entero válido
+	    try {
+	        int stock = Integer.parseInt(tfStock.getText());
+	        if (stock < 0) {
+	            lblMessage.setText("El stock no puede ser negativo");
+	            return false;
+	        }
+	    } catch (NumberFormatException e) {
+	        lblMessage.setText("El stock debe ser un número entero válido");
+	        return false;
+	    }
+
+	    return true;
+	}
+
 
 	private void clearFields() {
 		tfNameProduct.clear();
@@ -281,21 +331,6 @@ public class GUICrudProductController {
 		stage.show();
 		Stage temp = (Stage) this.btnBack.getScene().getWindow();
 		temp.close();
-		
-		
-	}
-	
-	private boolean validForm() {
-		
-		if (tfNameProduct.getText().isEmpty() || taDescriptionProduct.getText().isEmpty() || tfPrice.getText().isEmpty()
-				|| tfStock.getText().isEmpty() || tfCategory.getText().isEmpty()) {
-			lblMessage.setText("Faltan campos por llenar");
-			
-	
-			return false;
-		}
-		return true;
-		
 		
 		
 	}

@@ -15,17 +15,32 @@ public class Product {
     private String category;
     private int value; // 1 es malo, 2 es regular, 3 es bueno, 4 es muy bueno, 5 es excelente
     private String urlImage;
-    
+    private ArrayList<Comment> listComments;
+   
     
     
     public Product() {
-    	 
+    	this.listComments = new ArrayList<>();
     }
     
+    //Constructor para guardar un producto del carrito
+    public Product(String idProduct, String name, String description, double price, int stock, String category,
+			String urlImage) {
+		this.idProduct = idProduct;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.stock = stock;
+		this.category = category;
+		
+		this.urlImage = urlImage;
+		this.listComments = new ArrayList<>();
+	}
 
-    
 
-    public Product(String name, String description, double price, int stock, String category, String urlImage) {
+
+
+	public Product(String name, String description, double price, int stock, String category, String urlImage) {
 		super();
 		this.idProduct = generateUniqueID();
 		this.name = name;
@@ -34,6 +49,7 @@ public class Product {
 		this.stock = stock;
 		this.category = category;
 		this.urlImage = urlImage;
+		this.listComments = new ArrayList<>();
 	}
 
 	public Product(String name, String description, double price, int stock, String category,
@@ -46,6 +62,7 @@ public class Product {
         this.category = category;
         this.value = value;
         this.urlImage = urlImage;
+        this.listComments = new ArrayList<>();
     }
 
     private String generateUniqueID() {
@@ -86,8 +103,37 @@ public class Product {
     public String getUrlImage() {
         return urlImage;
     }
+    
+    
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	
 
-    @Override
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+	
+	
+	
+
+
+	public void setIdProduct(String idProduct) {
+		this.idProduct = idProduct;
+	}
+	public ArrayList<Comment> getListComments() {
+	    return listComments;
+	}
+
+	public void setListComments(ArrayList<Comment> listComments) {
+	    this.listComments = listComments;
+	}
+
+
+
+	@Override
     public String toString() {
         return "Product{" +
                 "idProduct='" + idProduct + '\'' +
@@ -98,6 +144,7 @@ public class Product {
                 ", category='" + category + '\'' +
                 ", value=" + value +
                 ", urlImage='" + urlImage + '\'' +
+                ", listComments='" + listComments + '\'' +
                 '}';
     }
 
